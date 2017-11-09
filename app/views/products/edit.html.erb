@@ -1,0 +1,13 @@
+<h1>出品編集</h1>
+ <%= form_for @product, method: 'patch' do |f| %>
+  <p>商品名<%= f.text_field :title %></p>
+  <p>価格<%= f.text_field :price %></p>
+  <p>説明<%= f.text_field :description %></p>
+  <p>メインイメージ<%= f.file_field :image %></p>	
+	  <%= f.fields_for :product_images do |product_image| %>
+	  	<p>サブイメージ<%=  product_image.file_field :image_id %></p>
+	  <% end %>
+  <p>在庫状況<%= f.text_field :is_available %></p>
+  
+  <%= f.submit '保存', class: 'btn btn-large btn-primary' %>
+<% end %>

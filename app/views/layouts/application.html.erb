@@ -1,0 +1,54 @@
+  <!DOCTYPE html>
+<html>
+  <head>
+    <title>EcSite</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  	<header>
+  	 <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed"data-toggle="collapse"data-target="#navbarEexample8">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">
+                野菜通販サイト
+              </a>
+            </div>
+            
+        <div class="collapse navbar-collapse" id="navbarEexample8">
+          <ul class="nav navbar-nav">
+            <% if user_signed_in? %>
+            <li role="presentation" class="active"><%= link_to 'トップ', root_path %></li>
+            <li role="presentation" class="active"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+            <li role="presentation" class="active"><%= link_to "ポスト一覧", products_path %></li>
+            <li role="presentation" class="active"><%= link_to 'マイページ', user_path(current_user) %></li>
+             <li role="presentation" class="active"><%= link_to "出品", new_product_path %></li>
+        
+         <% if current_user.admin_flg == true %>
+                <li role="presentation" class="active"><%= link_to "管理者ページ", rails_admin.dashboard_path %></li>                  
+              <% end %>
+          <% else %>
+            <li role="presentation" class="active"><%= link_to "サインイン", new_user_registration_path %></li>
+            <li role="presentation" class="active"><%= link_to "ログイン", new_user_session_path %></li>      
+          <% end %>        
+        </ul>
+              <% if user_signed_in? %>
+              <p class="navbar-text navbar-right">ようこそ <a href="#" class="navbar-link"><%= current_user.email %></a> さん。</p>
+              <% end %>
+            </div>
+          </div>
+    </nav>
+    <div class="clear"></div>    
+    </header>
+    <%= yield %>
+  </body>
+</html>

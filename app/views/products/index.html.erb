@@ -1,0 +1,45 @@
+<div id="IdCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li class="active" data-target="#sampleCarousel" data-slide-to="0"></li>
+    <li data-target="#sampleCarousel" data-slide-to="1"></li>
+    <li data-target="#sampleCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner center-block " role="listbox">
+    <div class="item active">
+      <img src="assets/the-sale.png" alt="First slide">
+    </div>
+    <div class="item">
+      <img src="assets/the-sale.png" alt="Second slide">
+    </div>
+    <div class="item">
+      <img src="assets/the-sale.png" alt="Third slide">
+    </div>
+  </div>
+  <a class="left carousel-control" href="#sampleCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">前へ</span>
+  </a>
+  <a class="right carousel-control" href="#sampleCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">次へ</span>
+  </a>
+</div>
+
+<div class="container-fluid">
+    <% @products.each do |product| %>
+      <div class="product">
+        <% if product.image.presence %>
+        　  <p><%= image_tag product.image %></p>
+        　<% else %>
+        　  <p> no image </p>
+        <% end %>
+        <p>商品:<%= product.title %></p>
+        <p>値段:<%= product.price %>円</p>
+        <p>詳細:<%= product.description %></p>
+        <p>在庫状況:<%= product.is_available %></p>
+
+        <p><%= link_to "商品詳細", product_path(product.id), class: "btn btn-default" %></p>
+      </div>
+     <% end %>
+</div>
+<%= paginate @products %>
