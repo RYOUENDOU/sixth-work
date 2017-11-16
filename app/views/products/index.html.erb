@@ -2,7 +2,7 @@
   <ol class="carousel-indicators">
     <li class="active" data-target="#sampleCarousel" data-slide-to="0"></li>
     <li data-target="#sampleCarousel" data-slide-to="1"></li>
-    <li data-target="#sampleCarousel" data-slide-to="2"></li>
+    <li data-target="#sampleCarou sel" data-slide-to="2"></li>
   </ol>
   <div class="carousel-inner center-block " role="listbox">
     <div class="item active">
@@ -30,16 +30,22 @@
       <div class="product">
         <% if product.image.presence %>
         　  <p><%= image_tag product.image %></p>
-        　<% else %>
-        　  <p> no image </p>
+        <% else %>
+        　    <p> no image </p>
         <% end %>
-        <p>商品:<%= product.title %></p>
-        <p>値段:<%= product.price %>円</p>
-        <p>詳細:<%= product.description %></p>
-        <p>在庫状況:<%= product.is_available %></p>
-
-        <p><%= link_to "商品詳細", product_path(product.id), class: "btn btn-default" %></p>
-      </div>
+              <p>商品:<%= product.title %></p>
+              <p>値段:<%= product.price %>円</p>
+              <p>詳細:<%= product.description %></p>
+              <p>在庫状況:<%= product.is_available %></p>
+              <p>カテゴリー:<%= product.category.name %></p>
+        <%= form_for '', url: add_item_path(product.id), method: :post do |f| %>
+              <%= f.number_field :quantity, value: 1, class: 'form-control', min: 1 %>
+               <div class="input-group-btn">
+                <%= f.hidden_field :product_id, value: product.id %>
+                <%= f.submit 'カート追加', class: 'btn btn-success' %> | <%= link_to "商品詳細", product_path(product.id), class: "btn btn-default" %>   
+                <% end %>
+              </div>
+            </div>
      <% end %>
 </div>
 <%= paginate @products %>

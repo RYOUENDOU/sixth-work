@@ -8,6 +8,7 @@
 	  	<p>サブイメージ<%=  product_image.file_field :image_id %></p>
 	  <% end %>
   <p>在庫状況<%= f.text_field :is_available %></p>
+  <p>カテゴリー<%= f.collection_select :category.name %></p>
   
   <%= f.submit '保存', class: 'btn btn-large btn-primary' %>
 <% end %>

@@ -6,5 +6,6 @@
     product.description = "#{i + 1}は、おすすめです。"
     product.image = Rails.root.join("app/assets/images/tomato.jpg").open
     product.is_available = ((i + 1) % 7 != 0)
+    product.category_id =rand(1..4)	
  end
 end
