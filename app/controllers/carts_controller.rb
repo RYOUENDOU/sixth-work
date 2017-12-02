@@ -1,20 +1,26 @@
 class CartsController < ApplicationController
-  
+
   def show
-    @products = CartItem.all
-    @cart_items = current_cart.cart_items
+    if session.id.presence
+      @cart_items = current_cart.cart_items
+      @cart = current_cart
+    else
+      redirect_to products_path
+    end
   end
 
   def add_item
-      @product = Product.find(params[:product_id])
-         if @cart_item.nil?
-         @cart_item = current_cart.cart_items.new(quantity: params[:quantity])
-         @cart_item.product_id = @product.id
-         @cart_item.quantity += params[:quantity].to_i
-         current_cart.save
+    if session.id.presence
+         @cart = Cart.new
+         current_cart = @cart
+         @cart_item = current_cart.cart_items.new(cart_item_params)
          @cart_item.save
+         @cart.save
+         session[:cart_id] = current_cart.id
          redirect_to add_item_path
-      end 
+    else
+      redirect_to products_path
+    end
   end
 
   def update_item
@@ -25,5 +31,11 @@ class CartsController < ApplicationController
   def delete_item
     @cart_item.destroy
     redirect_to current_cart
+  end
+
+    
+  private
+  def cart_item_params
+    params.require(:cart_item).permit(:product_id, :quantity)
   end
 end

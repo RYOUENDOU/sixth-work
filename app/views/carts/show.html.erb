@@ -1,17 +1,28 @@
-
-<table border= "1" class="cart">
-  <tr>
-    <th>商品名</th>
-    <th>価格</th>
-    <th>数量</th>
-    <th>イメージ</th>
-  </tr>
-  <% @cart_items.each do |cart_item| %>
-    <tr>
-      <td><%= cart_item.title %></td>
-      <td><%= cart_item.price %></td>
-      <td><%= cart_item.quantity %></td>
-      <td><%= cart_item.image %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="">  
+    <table border= "1" class="cart">
+      <tr>
+        <th>商品名</th>
+        <th>価格</th>
+        <th>数量</th>
+        <th>イメージ</th>
+        <th>小計</th>
+      </tr>
+      <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td><%= cart_item.product.title %></td>
+          <td><%= cart_item.product.price %></td>
+          <td><%= cart_item.quantity %></td>
+          <td><%= image_tag cart_item.product.image %></td>
+          <td><%= cart_item.product.price * cart_item.quantity %>円</td>
+        </tr>
+        <% end %>
+    </table>
+      <div class="">
+        <p>合計金額 <%= @cart_items.total_price %></p>
+      </div>
+</div>
+<div class="">
+   <%= link_to '買い物を続ける', products_path, class: 'btn btn-default' %>
+  <%= link_to '個数変更', checkout_path, class: 'btn btn-success' %>
+  <%= link_to 'レジへ進む', address_path, class: 'btn btn-primary' %>
+</div>

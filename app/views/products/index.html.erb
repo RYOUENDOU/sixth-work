@@ -24,7 +24,7 @@
     <span class="sr-only">次へ</span>
   </a>
 </div>
-
+<%= link_to "カテゴリーページ", product_category_path(@products, @category)  %>
 <div class="container-fluid">
     <% @products.each do |product| %>
       <div class="product">
@@ -38,11 +38,12 @@
               <p>詳細:<%= product.description %></p>
               <p>在庫状況:<%= product.is_available %></p>
               <p>カテゴリー:<%= product.category.name %></p>
-        <%= form_for '', url: add_item_path(product.id), method: :post do |f| %>
-              <%= f.number_field :quantity, value: 1, class: 'form-control', min: 1 %>
+
+        <%= form_for(@cart_item, url: add_item_path) do |f| %>
                <div class="input-group-btn">
-                <%= f.hidden_field :product_id, value: product.id %>
-                <%= f.submit 'カート追加', class: 'btn btn-success' %> | <%= link_to "商品詳細", product_path(product.id), class: "btn btn-default" %>   
+                  <%= f.number_field :quantity, value: 1, class: 'form-control', min: 1 %>
+                  <%= f.hidden_field :product_id, value: product.id %>
+                  <%= f.submit 'カート追加', class: 'btn btn-success' %> | <%= link_to "商品詳細", product_path(product.id), class: "btn btn-default" %>   
                 <% end %>
               </div>
             </div>

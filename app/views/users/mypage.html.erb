@@ -1,0 +1,22 @@
+<h1><%= @user.accounts.name %>のマイページ</h1>
+<div class=“”>
+<h2 class=“”>注文履歴</h2>
+<div class="">  
+    <table border= "1" class="list">
+      <tr>
+        <th>商品名</th>
+        <th>価格</th>
+        <th>数量</th>
+        <th>小計</th>
+      </tr>
+      <% @user.order_products.each do |order_product| %>
+        <tr>
+          <td><%= order_product.title %></td>
+          <td><%= order_product.price %></td>
+          <td><%= order_product.quantity %></td>
+          <td><%= order_product.price * order_product.quantity %>円</td>
+        </tr>
+     <% end %>
+    </table>
+</div>
+</div>

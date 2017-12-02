@@ -29,18 +29,23 @@
             <% if user_signed_in? %>
             <li role="presentation" class="active"><%= link_to 'トップ', root_path %></li>
             <li role="presentation" class="active"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-            <li role="presentation" class="active"><%= link_to "ポスト一覧", products_path %></li>
-            <li role="presentation" class="active"><%= link_to 'マイページ', user_path(current_user) %></li>
+            <li role="presentation" class="active"><%= link_to 'マイページ', show_path(current_user) %></li>
+            <li role="presentation" class="active"><%= link_to '購入履歴', mypage_path(current_user) %></li>
              <li role="presentation" class="active"><%= link_to "出品", new_product_path %></li>
         
          <% if current_user.admin_flg == true %>
-                <li role="presentation" class="active"><%= link_to "管理者ページ", rails_admin.dashboard_path %></li>                  
-              <% end %>
+                <li role="presentation" class="active"><%= link_to "管理者ページ", rails_admin.dashboard_path %></li>            
+                <li role="presentation" class="active"><%= link_to "購入確認画面ページ", admin_purchase_list_path(current_user) %></li>          
+          <% end %>
           <% else %>
             <li role="presentation" class="active"><%= link_to "サインイン", new_user_registration_path %></li>
             <li role="presentation" class="active"><%= link_to "ログイン", new_user_session_path %></li>      
-          <% end %>        
+          <% end %>
+          <% if session.id.present? %>
+                  <li role="presentation" class="active"><%= link_to "カートを見る", add_item_path %></li>
+              <% end %>
         </ul>
+
               <% if user_signed_in? %>
               <p class="navbar-text navbar-right">ようこそ <a href="#" class="navbar-link"><%= current_user.email %></a> さん。</p>
               <% end %>

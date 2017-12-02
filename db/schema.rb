@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171116051658) do
+ActiveRecord::Schema.define(version: 20171128110805) do
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "state"
+    t.integer "user_id"
+    t.string "postal_code"
+    t.string "address"
+    t.string "tel"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
 
   create_table "cart_items", force: :cascade do |t|
     t.integer "quantity"
@@ -25,13 +36,34 @@ ActiveRecord::Schema.define(version: 20171116051658) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "product_id"
   end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "order_products", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.integer "order_id"
+    t.integer "price"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.string "image"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.integer "user_id"
+    t.string "postal_code"
+    t.string "address"
+    t.string "tel"
   end
 
   create_table "product_images", force: :cascade do |t|

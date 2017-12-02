@@ -1,0 +1,46 @@
+<h1>購入者情報入力</h1>
+
+<%= form_for(@account, url:complete_path) do |f| %>
+<%# binding.pry %>>
+  <% if @account.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(@account.errors.count, "error") %>必要事項を記入してください！</h2>
+        <ul>
+        <% @account.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>  
+    <% end %>
+<div class="col-sm-6">
+  <div class="form-group">
+    <%= f.label :name, class: 'control-label col-sm-4' %>
+    <div class="col-sm-8">
+      <%= f.text_field :name, placeholder: '氏名', class: 'form-control' %>
+    </div>
+  <div class="form-group">
+    <%= f.label :postal_code, class: 'control-label col-sm-4' %>
+    <div class="col-sm-8">
+      <%= f.text_field :postal_code, placeholder: '1234567', class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :address, class: 'control-label col-sm-4' %>
+    <div class="col-sm-8">
+      <%= f.text_field :address, placeholder: '住所', class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :tel, class: 'control-label col-sm-4' %>
+ 
+    <div class="col-sm-8">
+      <%= f.text_field :tel, placeholder: '電話番号', class: 'form-control' %>
+    </div>
+  </div>
+          <%= f.hidden_field :user_id %>
+  <div class="col-sm-12 text-center">
+    <%= f.submit '購入', class: 'btn btn-primary' %>
+    <%= link_to 'カートに戻る', add_item_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<% end %>  

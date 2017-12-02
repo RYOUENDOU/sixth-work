@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
-	before_action :authenticate_user!
-  
+	
   add_breadcrumb 'トップ', :products_path	 
   add_breadcrumb '商品詳細', :product_path
   add_breadcrumb '出品', :new_product_path
@@ -34,8 +33,6 @@ class ProductsController < ApplicationController
 
   def edit
  	  @product = Product.find(params[:id])
-   
-    # @product_images = @product.product_images
   end
 
   def update
@@ -51,7 +48,9 @@ class ProductsController < ApplicationController
   	redirect_to products_path 		  	
   end
 
-
+  def category
+    @categories = Category.all  
+  end
 
   private
   	def product_params
