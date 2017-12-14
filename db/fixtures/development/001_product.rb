@@ -4,7 +4,7 @@
     product.title = "#{i + 1}番目の野菜"
     product.price = (i + 1) * 100
     product.description = "#{i + 1}は、おすすめです。"
-    product.image = Rails.root.join("app/assets/images/tomato.jpg").open
+    product.image = Rails.root.join("public/images/tomato.jpg").open
     product.is_available = ((i + 1) % 7 != 0)
     product.category_id =rand(1..4)	
  end
