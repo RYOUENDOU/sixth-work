@@ -1,4 +1,4 @@
-100.times do |i| # 100回繰り返す
+50.times do |i| # 100回繰り返す
   Product.seed_once(:id) do |product|
     product.id = i + 1 # idがずれていくように指定する
     product.title = "#{i + 1}番目の野菜"
